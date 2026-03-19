@@ -16,9 +16,25 @@ public Alumno(string nombre, int dni)
     this.cantidadFaltas = 0.0;
 }
 
+public int getDNI() 
+{
+    return this.dni;
+}
 
+public string getNombre() 
+{
+    return this.nombre;
+}
 
+public double getFaltas() 
+{
+    return this.faltas;
+}
 
+public void sumarFalta(double faltas) 
+{
+    this.cantidadFaltas = this.cantidadFaltas + faltas;
+}
 
 
 
