@@ -28,12 +28,12 @@ public string getNombre()
 
 public double getFaltas() 
 {
-    return this.faltas;
+    return this.cantidadFaltas;
 }
 
-public void sumarFalta(double faltas) 
+public void sumarFalta(double nuevasfaltas) 
 {
-    this.cantidadFaltas = this.cantidadFaltas + faltas;
+    this.cantidadFaltas = this.cantidadFaltas + nuevasfaltas;
 }
 
 

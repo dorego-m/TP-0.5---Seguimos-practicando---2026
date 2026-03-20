@@ -13,7 +13,7 @@ public Curso(string nombre)
     this.alumnos = new List<Alumno>();
 }
 
-public string nuevoEstudiante(string nombre int dni) 
+public string nuevoEstudiante(string nombre, int dni) 
 {
 string respuesta = "";
 Alumno nuevoAlumno = new Alumno(nombre, dni);
@@ -37,7 +37,7 @@ return respuesta;
 public string buscarAlumno(int dni)
 {
     string respuesta = "";
-    foreach (alumno a in alumnos) 
+    foreach (Alumno a in alumnos) 
     {
         if (a.getDNI() == dni) 
         {
@@ -46,16 +46,16 @@ public string buscarAlumno(int dni)
     }
     if (respuesta == "") 
     {
-        respuesta = "No se econtro un alumno con ese dni"
+        respuesta = "No se econtro un alumno con ese dni";
     }
     return respuesta;
 }
 
-public string agregarFalta(string cantidad int dni) 
+public string agregarFalta(string cantidad, int dni) 
 {
     string respuesta = "";
     cantidad = cantidad.ToLower();
-    foreach(alumno a in alumnos) 
+    foreach(Alumno a in alumnos) 
     {
         if (dni == a.getDNI()) 
         {
@@ -87,6 +87,8 @@ public string agregarFalta(string cantidad int dni)
     return respuesta;
 }
 
+/*
+
 public string mostrarAlumnos() 
 {
     string respuesta = "";
@@ -114,8 +116,37 @@ public string mostrarAlumnosConFaltas()
     return respuesta;
 }
 
+*/
 
+public string mostrarAlumnos(bool todos) 
+{
+    string respuesta = "";
+    int i = 0;
+    int f = 0;
+    foreach (Alumno a in alumnos) 
+    {
+        if (a.getFaltas() >= 15 || todos == true) 
+        {
+            respuesta = respuesta + a.getNombre() + " " + a.getDNI() + ", ";
+            f++;
+        }
+        i++;
+    }
+    if (f == 0 && i != 0) 
+    {
+        respuesta = "No hay alumnos con mas de 15 faltas";
+    }
+    else if (i == 0) 
+    {
+        respuesta = "No hay alumnos";
+    }
+    return respuesta;
+}
 
-
+public int insertarInt(string s) 
+{
+    Console.WriteLine(s);
+    return int.Parse(Console.ReadLine());
+}
 
 }
