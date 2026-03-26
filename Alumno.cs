@@ -5,20 +5,13 @@ class Alumno
 
  // ATRIBUTOS PRIVADOS
  private string nombre;
- private int dni;
  private double cantidadFaltas;
 
 // --- CONSTRUCTOR ---
-public Alumno(string nombre, int dni)
+public Alumno(string nombre)
 {
     this.nombre = nombre;
-    this.dni = dni;
     this.cantidadFaltas = 0.0;
-}
-
-public int getDNI() 
-{
-    return this.dni;
 }
 
 public string getNombre() 

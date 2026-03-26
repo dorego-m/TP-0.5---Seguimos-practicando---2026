@@ -5,30 +5,25 @@ class Curso
 
  // ATRIBUTOS PRIVADOS
  private string nombre;
- private List<Alumno> alumnos;
+ private Dictionary<int, Alumno> dicAlumnos;
 
 public Curso(string nombre)
 {
     this.nombre = nombre;
-    this.alumnos = new List<Alumno>();
+    this.dicAlumnos = new Dictionary <int, Alumno>();
 }
 
 public string nuevoEstudiante(string nombre, int dni) 
 {
 string respuesta = "";
-Alumno nuevoAlumno = new Alumno(nombre, dni);
-int i = 0;
-while (i < this.alumnos.Count && this.alumnos[i].getDNI() != dni)
-    {
-        i++;
-    }
-if (i < this.alumnos.Count)
+Alumno nuevoAlumno = new Alumno(nombre);
+if (dicAlumnos.ContainsKey(dni) = true)
     {
         respuesta = "Ya hay un alumno con ese dni!";
     }
 else
     {
-        this.alumnos.Add(nuevoAlumno);
+        dicAlumnos.Add(dni,nuevoAlumno)
         respuesta = "Alumno agregado!";
     }
 return respuesta;
@@ -37,16 +32,15 @@ return respuesta;
 public string buscarAlumno(int dni)
 {
     string respuesta = "";
-    foreach (Alumno a in alumnos) 
+
+    if (dicAlumnos.ContainsKey(dni)) 
     {
-        if (a.getDNI() == dni) 
-        {
-            respuesta = "El alumno con este dni es " + a.getNombre() + " y tiene " + a.getFaltas() + " faltas.";
-        }
+        respuesta = "El alumno con este dni es " + dicAlumnos[dni].getNombre() + " y tiene " + dicAlumnos[dni].getFaltas() + " faltas.";
     }
-    if (respuesta == "") 
+
+    else if (respuesta == "") 
     {
-        respuesta = "No se econtro un alumno con ese dni";
+        respuesta = "No se encontro un alumno con ese dni";
     }
     return respuesta;
 }
@@ -55,31 +49,33 @@ public string agregarFalta(string cantidad, int dni)
 {
     string respuesta = "";
     cantidad = cantidad.ToLower();
-    foreach(Alumno a in alumnos) 
+
+    if (dicAlumnos.ContainsKey(dni)) 
     {
-        if (dni == a.getDNI()) 
-        {
+
     if (cantidad == "entera") 
     {
-        a.sumarFalta(1);
-        respuesta = "Se agrego una falta a " + a.getNombre();
+        dicAlumnos[dni].sumarFalta(1);
+        respuesta = "Se agrego una falta a " + dicAlumnos[dni].getNombre();
     }
     else if (cantidad == "media") 
     {
-        a.sumarFalta(0.5);
-        respuesta = "Se agrego media falta a " + a.getNombre();
+        dicAlumnos[dni].sumarFalta(0.5);
+        respuesta = "Se agrego media falta a " + dicAlumnos[dni].getNombre();
     }
     else if (cantidad == "testing") 
     {
-        a.sumarFalta(15);
-        respuesta = "Se agrego 15 faltas a " + a.getNombre();
+        dicAlumnos[dni].sumarFalta(15);
+        respuesta = "Se agrego 15 faltas a " + dicAlumnos[dni].getNombre();
     }
     else 
     {
         respuesta = "Perdon, pero " + cantidad + " no es una opcion valida.";
     }
-        }
+    
     }
+    
+
     if (respuesta == "") 
     {
         respuesta = "no se encontro un alumno con ese DNI";
@@ -123,11 +119,11 @@ public string mostrarAlumnos(bool todos)
     string respuesta = "";
     int i = 0;
     int f = 0;
-    foreach (Alumno a in alumnos) 
+    foreach (int dni in dicAlumnos.Keys) 
     {
         if (a.getFaltas() >= 15 || todos == true) 
         {
-            respuesta = respuesta + a.getNombre() + " " + a.getDNI() + ", ";
+            respuesta = respuesta + dicAlumnos[dni].getNombre() + " " + dicAlumnos[dni].getDNI() + ", ";
             f++;
         }
         i++;
