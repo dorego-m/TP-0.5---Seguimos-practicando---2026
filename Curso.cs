@@ -17,13 +17,13 @@ public string nuevoEstudiante(string nombre, int dni)
 {
 string respuesta = "";
 Alumno nuevoAlumno = new Alumno(nombre);
-if (dicAlumnos.ContainsKey(dni) = true)
+if (dicAlumnos.ContainsKey(dni))
     {
         respuesta = "Ya hay un alumno con ese dni!";
     }
 else
     {
-        dicAlumnos.Add(dni,nuevoAlumno)
+        dicAlumnos.Add(dni,nuevoAlumno);
         respuesta = "Alumno agregado!";
     }
 return respuesta;
@@ -121,9 +121,9 @@ public string mostrarAlumnos(bool todos)
     int f = 0;
     foreach (int dni in dicAlumnos.Keys) 
     {
-        if (a.getFaltas() >= 15 || todos == true) 
+        if (dicAlumnos[dni].getFaltas() >= 15 || todos == true) 
         {
-            respuesta = respuesta + dicAlumnos[dni].getNombre() + " " + dicAlumnos[dni].getDNI() + ", ";
+            respuesta = respuesta + dicAlumnos[dni].getNombre() + " " + dni + ", ";
             f++;
         }
         i++;
